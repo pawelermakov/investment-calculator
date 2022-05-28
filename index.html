@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <title>Калькулятор для расчета инвестиций</title>
+</head>
+<body class="bg-secondary bg-opacity-25">
+  <nav class="navbar navbar-light bg-light mb-4 shadow-sm d-none d-lg-block">
+    <div class="container-fluid d-flex justify-content-center">
+      <span class="navbar-brand mb-0 h1">Калькулятор для расчета инвестиций</span>
+    </div>
+  </nav>
+  <div class="container">
+    <form class="row g-4" id="form">
+      <div class="col-sm-12 col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-header text-center fw-bold">Исходные данные</div>
+          <div class="card-body">
+            <div class="row">
+              <label for="original_amount" class="col-md-12 col-lg-6 col-form-label">Сумма первоначальных инвестиций:</label>
+              <div class="col-md-12 col-lg-6">
+                <div class="input-group mb-3">
+                  <input type="number" min="0" class="form-control" id="original_amount" required>
+                  <span class="input-group-text">₽</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="amount" class="col-md-12 col-lg-6 col-form-label">Сумма ежемесячных инвестиций:</label>
+              <div class="col-md-12 col-lg-6">
+                <div class="input-group mb-3">
+                  <input type="number" min="0" class="form-control" id="amount" required>
+                  <span class="input-group-text">₽</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="percent" class="col-md-12 col-lg-6 col-form-label">Годовая процентная ставка:</label>
+              <div class="col-md-12 col-lg-6">
+                <div class="input-group mb-3">
+                  <input type="number" min="0" class="form-control" id="percent" required>
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="period" class="col-md-12 col-lg-6 col-form-label">Срок инвестирования:</label>
+              <div class="col-md-12 col-lg-6">
+                <div class="input-group mb-3">
+                  <input type="number" min="0" class="form-control" id="period" required>
+                  <select class="form-select" id="period_type">
+                    <option value="m" selected>месяцев</option>
+                    <option value="y">лет</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="currency" class="col-md-12 col-lg-6 col-form-label">Валюта расчета:</label>
+              <div class="col-md-12 col-lg-6">
+                <select class="form-select" id="currency">
+                  <option value="RUB" selected>Рубли</option>
+                  <option value="USD">Доллары</option>
+                  <option value="EUR">Евро</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Рассчитать</button>
+            <button type="reset" class="btn btn-danger btn-lg">Сбросить</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-header text-center fw-bold">Результаты расчета</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <label for="result_period" class="col-form-label">Через:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_period" readonly>
+                  <span class="input-group-text">месяц(ев)</span>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <label for="result_factor" class="col-form-label">Ваши инвестиции увеличатся в:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_factor" readonly>
+                  <span class="input-group-text">раз(а)</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <label for="result_total" class="col-form-label">И составят:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_total" readonly>
+                  <span class="input-group-text currency">₽</span>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <label for="result_monthly_profit" class="col-form-label">Прибыль в месяц:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_monthly_profit" readonly>
+                  <span class="input-group-text currency">₽</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <label for="result_profit" class="col-form-label">Чистый доход составит:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_profit" readonly>
+                  <span class="input-group-text currency">₽</span>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <label for="result_percentage_profit" class="col-form-label">В процентах:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control fw-bold" id="result_percentage_profit" readonly>
+                  <span class="input-group-text">%</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 col-lg-6">
+                <label for="result_invest" class="col-form-label">Инвестированная сумма составила:</label>
+                <div class="input-group">
+                  <input type="text" class="form-control fw-bold" id="result_invest" readonly>
+                  <span class="input-group-text currency">₽</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <label for="share" class="col-form-label">Поделиться ссылкой на результаты рассчета:</label>
+                <div class="input-group">
+                  <textarea rows="4" class="form-control fw-bold" id="share" readonly></textarea>
+                  <button type="button" class="btn btn-outline-primary" id="copy">Скопировать</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <nav class="navbar navbar-light bg-light fixed-bottom shadow-sm d-none d-lg-block">
+    <div class="container-fluid d-flex justify-content-center">
+      <p class="text-center mb-0">&copy; 2021 Павел Ермаков</p>
+    </div>
+  </nav>
+  <script src="script.js"></script>
+</body>
+</html>
